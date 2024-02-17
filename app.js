@@ -25,11 +25,14 @@ app.use(hpp());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-//Request rate Limit
+// Trust the 'X-Forwarded-For' header
+app.set("trust proxy", true);
+
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
   max: 2000,
 });
+
 app.use(limiter);
 
 //Database connection
