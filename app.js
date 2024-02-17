@@ -1,10 +1,9 @@
 const express = require("express");
 const router = require("./src/router/api");
 const bodyParser = require("body-parser");
-const app = express();
 const dotenv = require("dotenv");
 dotenv.config({ path: "config.env" });
-
+const app = express();
 //Security Lib Imports
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
@@ -26,7 +25,8 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 // Trust the 'X-Forwarded-For' header
-app.set("trust proxy", true);
+
+app.set("trust proxy", 1);
 
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
